@@ -1,6 +1,6 @@
 # TDD: test driven development
 Ensures that there is no untested code
-## TDD cycle
+### TDD cycle
 Red Green Refactor
 + see code fail
 + see code pass
@@ -66,13 +66,13 @@ end
 
 ``` ruby
 
-	describe 'baking' do
-		it 'should bake cookie a litle' do
-			cookie.bake!(4)
-			expect(cookie.time_baked).to eq(4)
-		end
+describe 'baking' do
+	it 'should bake cookie a litle' do
+		cookie.bake!(4)
+		expect(cookie.time_baked).to eq(4)
 	end
 end
+
 ```
 
 
@@ -263,3 +263,11 @@ Refactor!!!
 		end
 	end
 ```
+
+### Stub and Mock
+
+## stub
+instead of running the same method in every test where you want the same outcome, just stub the test and force its outcome once
+## mock or double
+??
+
