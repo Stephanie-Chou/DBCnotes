@@ -309,7 +309,7 @@ def put_in(cookie)
 end
 ```
 
-## write another test
+### write another test
 
 Using stub. Note, you can't chain stubs on doubles
 ```ruby
@@ -348,11 +348,11 @@ def take_out
 end
 ```
 
-refactor! because not raising an error and vague it description is not good enough. Note that the ordering got flipped. the assertion is first.
+refactor! because not raising an error and vague it description is not good enough. Note that the ordering got flipped, the assertion is first.
 ```ruby
 describe Oven do
 	let(:oven){Oven.new}
-	left(:cookie){double('Cookie')}
+	let(:cookie){double('Cookie')}
 	it 'takes anything' do
 		oven.put_in(cookie)
 		expect(oven.empty?)to eq(false)
