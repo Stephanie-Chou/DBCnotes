@@ -92,16 +92,15 @@ end
 But what if we bake a little more?
 
 ``` ruby
-	describe 'baking' do
-		it 'should bake cookie a litle' do
-			cookie.bake!(4)
-			expect(cookie.time_baked).to eq(4)
-		end
-		it 'should bake cookie a lot' do
-			cookie.bake!(4)
-			cookie.bake!(2)
-			expect(cookie.time_baked).to eq(6)
-		end
+describe 'baking' do
+	it 'should bake cookie a litle' do
+		cookie.bake!(4)
+		expect(cookie.time_baked).to eq(4)
+	end
+	it 'should bake cookie a lot' do
+		cookie.bake!(4)
+		cookie.bake!(2)
+		expect(cookie.time_baked).to eq(6)
 	end
 end
 ```
@@ -249,4 +248,18 @@ describe 'cookie status' do
 		expect(cookie.status).to eq(:chewy)
 	end
 end
+```
+Refactor!!!
+``` ruby
+	def status
+		if @time_baked<7
+			:undercooked
+		elseif @time_baked <10
+			:chewy
+		elseif @time_baked<12
+			:perfect
+		else
+			:burned
+		end
+	end
 ```
