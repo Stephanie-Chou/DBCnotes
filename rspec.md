@@ -9,6 +9,8 @@ Don't forget to require capybara!
 ## Feature Tests
 ###Example feature testing for Craigslist
 ```ruby
+require 'spec_helper'
+
 feature 'Browsing categories' do
 	let!(:category){Category.create!(name: 'Fake Category')}
 	#show categories
@@ -64,7 +66,7 @@ describe CategoriesController do
 	end
 end
 ```
-test data! Do you actually need to have an active record model to make this test run? No! Use a stub. You stub all the categories because yo want to ensure that tests run as quickly as possible. Without stubbing, you would end up writing to the db.
+test data! Do you actually need to have an active record model to make this test run? No! Use a stub. You stub all the categories because yo want to ensure that tests run as quickly as possible. Without stubbing, you would end up writing to the db. This stub says that category will always return the array ``` [category] ```
 ```ruby
 describe CategoriesController do
 	it 'renders categories as json' do
@@ -75,4 +77,31 @@ describe CategoriesController do
 		expect(body.length).to eq(1)
 	end
 end
+```
+### test a redirect
+
+```ruby
+	it 'redirects to rooth path' do
+		get :show, :id =>1
+		expect(page).to redirect_to('root_path')
+	end
+```
+
+### test a create
+note: you are allowed to have trailing commas in ruby. but not js
+``` ruby
+	describe articlesController do
+		it 'creates a controller' do
+			article_attributes = {
+			title: 'Fake Article',
+			price: '$1.59',
+			}
+		end
+		# this line says please create a post request and post it to create
+		# also could be article_path instead of :create
+		post(:create, :article => article_attributes, :format => :json)
+		body :JSON.partse(response.body)
+		expect(body['title']).to eq 'Fake Article'
+		expect(body['price']).to eq 159
+	end
 ```
