@@ -348,7 +348,7 @@ def take_out
 end
 ```
 
-refactor! because not raising an error and vague it description is not good enough
+refactor! because not raising an error and vague it description is not good enough. Note that the ordering got flipped. the assertion is first.
 ```ruby
 describe Oven do
 	let(:oven){Oven.new}
@@ -358,8 +358,9 @@ describe Oven do
 		expect(oven.empty?)to eq(false)
 	end
 	it 'bakes its contents' do
-		cookie.stub(:bake!)
-		expect(oven.bake!(4)).should_not raise_error
+		expect(cookie).to receive(:bake!).with(4)
+		oven.put_in(cookie)
+		expect(oven.bake!(4))
 	end
 end
 ```
