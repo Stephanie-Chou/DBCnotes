@@ -1,13 +1,14 @@
 # TDD: test driven development
 Ensures that there is no untested code
-### TDD cycle
+## TDD cycle
 Red Green Refactor
 + see code fail
 + see code pass
 + refactor
 
+## Live Code!
 
-## first test	
+### first test	
 ```ruby
 	class Cookie
 		attr_reader :type, :time_baked
@@ -27,7 +28,7 @@ describe Cookie do
 end
 ```
 
-## second test
+### second test
 ```ruby
 class Cookie
 	attr_reader :type, :time_baked
@@ -61,7 +62,7 @@ let (:cookie){Cookie.new('peanut butter')}
 end
 ```
 
-## 3rd time!
+### 3rd time!
 
 
 ``` ruby
@@ -119,7 +120,7 @@ class Cookie
 end
 
 ```
-## Test number 4
+### Test number 4
 
 ```ruby
 	describe 'cookie status' do
@@ -264,10 +265,47 @@ Refactor!!!
 	end
 ```
 
-### Stub and Mock
+## Stub and Mock
 
-## stub
-instead of running the same method in every test where you want the same outcome, just stub the test and force its outcome once
-## mock or double
-??
+### stub
+Instead of running the same method in every test where you want the same outcome, just stub the test and force its outcome once.
+You use this to change the statue before the test
+### mock or double
+Mock is an alias if you want to check expectations
+When to use a mock? When you are trying to make a decision where the test doesn't depend on the choice (ex: what type of cookie do I use?), then use a mock.
+
+## Live Code!
+### First go
+
+if we do this, we have a dependency on cookie being correctly initialized.
+```ruby
+describe Oven do
+	it 'takes cookies' do
+		oven = Oven.new
+		oven.put_in(Cookie.new('peanut butter'))
+	end
+end
+```
+So we should use a mock. but in rspec, we call mock a double()... as in doppelganger. It takes an argument that gives that double a name.
+```ruby
+describe Oven do
+	it 'takes anything' do
+		oven = Oven.new
+		oven.put_in(double('Cookie'))
+		expect(oven.empty?)to eq(false)
+	end
+end
+```
+```ruby
+def initialize
+	@contents = []
+end
+def empty?
+	contents.length == 0
+end
+
+def put_in(cookie)
+	@ contents << cookie
+end
+```
 
