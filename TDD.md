@@ -309,3 +309,57 @@ def put_in(cookie)
 end
 ```
 
+## write another test
+
+Using stub. Note, you can't chain stubs on doubles
+```ruby
+describe Oven do
+	it 'takes anything' do
+		oven = Oven.new
+		oven.put_in(double('Cookie'))
+		expect(oven.empty?)to eq(false)
+	end
+	it 'bakes its contents' do
+		oven = Oven.new
+		cookie = double('Cookie')
+		cookie.stub(:bake!)
+		expect(oven.bake!(4)).should_not raise_error
+	end
+end
+```
+```ruby
+def initialize
+	@contents = []
+end
+def empty?
+	contents.length == 0
+end
+
+def put_in(cookie)
+	@ contents << cookie
+end
+
+def bake!(time)
+	@contents.map!{|s| s.bake(time)}
+end
+
+def take_out
+	@contents.pop
+end
+```
+
+refactor! because not raising an error and vague it description is not good enough
+```ruby
+describe Oven do
+	let(:oven){Oven.new}
+	left(:cookie){double('Cookie')}
+	it 'takes anything' do
+		oven.put_in(cookie)
+		expect(oven.empty?)to eq(false)
+	end
+	it 'bakes its contents' do
+		cookie.stub(:bake!)
+		expect(oven.bake!(4)).should_not raise_error
+	end
+end
+```
