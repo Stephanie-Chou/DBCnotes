@@ -3,9 +3,11 @@ In this example, I will be using a basic blog to demonstrate why Angular is a ve
 
 
 ## Comparing Angular to Underscore Templates
-What have we been doing before? When we create a fully fledged web app with a backend and a front end, You have views and controllers. You need to do a couple of things to make this all work: make a, AJAX call to the database, store some of the request return data front end (if necessary), and then render your view. Lets say you want to get a page that shows all your blog posts. It looks like as follows:
+What have we been doing before? When we create a fully fledged web app with a backend and a front end, You have models, views and controllers. You need to do a couple of things to make this all work: make a, AJAX call to the database, store some of the request return data front end (if necessary), and then render your view. This same MVC structure holds true for Angular, but in a far more concise way.
 
-**Non Angular Controller of sorts**
+Lets say you want to get a page that shows all your blog posts. It looks like as follows:
+
+###Non Angular Controller of sorts
 ```js
 var App = {
   init: function(){
@@ -29,9 +31,9 @@ $( document ).ready(function() {
 });
 ```
 
-**Angular Controller**
+###Angular Controller
 You have a frontend controller to tell everybody when to render. It looks like a case statement. This is in your 'main.js' file. Apologies, this is in coffeescript.
-Angular Vocab
+**Angular Vocab**
 Module: a container for the different parts of an app including controllers, services, filters, directives
 ```js
 @blogApp = angular.module('blogApp', [])
@@ -56,8 +58,7 @@ Module: a container for the different parts of an app including controllers, ser
 ])
 ```
 
-
-**Non-Angular Model**
+###Non-Angular Model
 To display all the posts, we break it up into two Models. We have a collection of posts, and then a post.
 ```js
 function Post(options){
@@ -90,8 +91,9 @@ PostCollection.prototype.fetch = function() {
 };
 ```
 
-**Angular Model**
-In angular, that AJAX call and the multiple models can all get condensed into one Controller. Quick vocab for angular:
+###Angular Model
+In angular, that AJAX call and the multiple models can all get condensed into one Controller.
+**Angular Vocab**
 Controller: the 'business logic' behind the views
 Scope: context where the model is stored so that controllers, directives and expressions can access it
 The controller is where we make the AJAX call. You store your collection of posts in a single array called '$scope.posts'.
@@ -110,10 +112,10 @@ blogApp.controller('PostIndexCtrl', ['$scope', '$location', '$http', '$routePara
   }
 ])
 ```
-**Non-Angular View**
+###Non-Angular View
 In your view, you have to render the collection and each post in the collection.
 CollectionView
-'''js
+```js
 function PostsView(collection){
   this.collection = collection;
   this.$el = $("<div></div>");
@@ -128,9 +130,9 @@ PostsView.prototype.render = function() {
   }, this);
   return this.$el;
 }
-'''
+```
 Post Row View
-'''js
+```js
 function PostRowView(model){
   this.model = model;
   this.$el = $("<div></div>");
@@ -147,18 +149,17 @@ PostRowView.prototype.templateData = function() {
     date: this.model.date,
   };
 };
-'''
+```
 
 There are two also templates, one for the collection and one for all the row-views.
 
-'''html
+```html
 <script type="text/template" id="post-row-template">
     <li id="<%=title%>"><%=title%></li>
 </script>
-'''
-
-**Angular View**
-In angular, there are awesome `ng` tags that you can use to embed awesome non-static functionality into your HTML. This means looping and all sorts of great stuff (Chris's talk on Angular covered this kind of functionality and it was great. I won't try to repeat it here).
+```
+###Angular View
+In angular, there are awesome `ng` tags that you can use to embed awesome non-static functionality into your HTML. This means looping and all sorts of great stuff (Chris's talk on Angular covered this kind of functionality and it was great. I won't try to repeat it here). You can now simply refer to the posts collection we created earlier in the post controller and loop through it.
 ```html
 <ul ng-repeat="post in posts" class = "no-bullet">
     <li id = '{{post.id }}' class = "post panel"><p class="right">{{post.date}}</p><a href="#/posts/{{post.id}}"><h3>{{post.title }}</h3></a><p> {{post.abstract}}</p></li>
@@ -174,7 +175,7 @@ One thing that always gets me confused with some tutorials and instructions is t
 1. Download Angular! Grab the files called angular.js as well as angular-mocks.js. **where to put it** 'app/assets/javascripts'
 2. You will be making your own angular controllers, so you will want to create a folder for them. Angular controller files are '.js' files. **where to put them** Create a path 'app/assets/javascripts/angular/controllers'
 3. Set up your asset pipeline. Put the following lines of code in 'app/assets/javascripts/application.js':
-'''
+```
 //= require jquery
 //= require jquery_ujs
 
@@ -183,7 +184,7 @@ One thing that always gets me confused with some tutorials and instructions is t
 //= require main
 
 //= require_tree .
-'''
+```
 4. You will also have your own views in Angular. Views are just plain old 'html' files. **Where to put them** Create a path '/public/templates'. Note that I just put views here because I followed a tutorial that said that's where they go. It might make more sense to put them in 'app/views'
 
 ## resources
