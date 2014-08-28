@@ -31,3 +31,6 @@ codeship.io
 + never push to master only use pull requests
 + small atomic commits with descriptive messages
 + pull requests are peer reviewed before merging
+
+
+master should always be working, passing, and deployable.
