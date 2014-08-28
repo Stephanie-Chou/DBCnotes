@@ -172,8 +172,10 @@ Angular is great. It really shortens the amount of code you have to write. It al
 ## Getting Angular integrated with Rails
 One thing that always gets me confused with some tutorials and instructions is they tell you to download a file- but they don't tell you where to put it. I promise, I'll tell you where to put the files.
 
+**these instructions are super rough so please use the resource I provided from honeybadger.com for better instructions!**
+
 1. Download Angular! Grab the files called angular.js as well as angular-mocks.js. **where to put it** 'app/assets/javascripts'
-2. You will be making your own angular controllers, so you will want to create a folder for them. Angular controller files are '.js' files. **where to put them** Create a path 'app/assets/javascripts/angular/controllers'
+2. **models** You will be making your own angular controllers (this is not actually the controller), so you will want to create a folder for them. Angular controller files are '.js' files. **where to put them** Create a path 'app/assets/javascripts/angular/controllers'
 3. Set up your asset pipeline. Put the following lines of code in 'app/assets/javascripts/application.js':
 ```
 //= require jquery
@@ -185,8 +187,13 @@ One thing that always gets me confused with some tutorials and instructions is t
 
 //= require_tree .
 ```
-4. You will also have your own views in Angular. Views are just plain old 'html' files. **Where to put them** Create a path '/public/templates'. Note that I just put views here because I followed a tutorial that said that's where they go. It might make more sense to put them in 'app/views'
+4. **Views**You will also have your own views in Angular. Views are just plain old 'html' files. **Where to put them** Create a path '/public/templates'. Note that I just put views here because I followed a tutorial that said that's where they go. It might make more sense to put them in 'app/views'
+5. **Controller** create a main.js file. This will contain your frontend Angular controller. **where to put it** 'app/assets/javascripts'
+6. **More Views**You will need to add 'ng-app = appName' in your main html page like so: '<html ng-app = "appName">' appName should match the name you will give the angular module in your main.js file.
+
 
 ## resources
 a great resource. Maybe made by one of our ancestral DBCers? This is what I followed to get Angular set up with Rails. I highly endorse it. Don't neccessarily follow his lead on scaffolding or using coffeescript.
 https://www.honeybadger.io/blog/2013/12/11/beginners-guide-to-angular-js-rails
+
+The angular docs are crazy good. https://docs.angularjs.org/guide
