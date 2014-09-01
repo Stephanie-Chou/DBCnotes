@@ -8,16 +8,25 @@ Make things go FAST
 + save servers
 + efficiency throughput
 + save machines and developer time
+
 ## categories of performance problems
-###Network (Bandwith/ Latency)
+
+### Network (Bandwith/ Latency)
+
 + bandwidth: how much data you are sending
 	+ Bytes! extra spaces, fields, uncompressed responses and images
 + latency: how long it takes to set up a connection
 	+ connections are expensive (network, local, TCP)
 	+ secure connections are VERY expensive 
 TCP handshake!
-###Computation
+
+### Computation
+
 + loops take time. a lot of time. don't do heavy stuff in a loop (api calls, db queries etc)
-###Resource Utilization
++ resource limitations: memory, cpu, dick io accessing
+
+### Resource Utilization
+
 ## instance of problems with solutions
+
 ## downsides of performance

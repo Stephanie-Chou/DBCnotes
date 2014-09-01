@@ -6,8 +6,8 @@ In this example, I will be using a basic blog to demonstrate why Angular is a ve
 What have we been doing before? When we create a fully fledged web app with a backend and a front end, You have models, views and controllers. You need to do a couple of things to make this all work: make a, AJAX call to the database, store some of the request return data front end (if necessary), and then render your view. This same MVC structure holds true for Angular, but in a far more concise way.
 
 Lets say you want to get a page that shows all your blog posts. It looks like as follows:
-
-###Non Angular Controller of sorts
+##Controllers
+####Non Angular Controller of sorts
 ```js
 var App = {
   init: function(){
@@ -31,7 +31,7 @@ $( document ).ready(function() {
 });
 ```
 
-###Angular Controller
+####Angular Controller
 You have a frontend controller to tell everybody when to render. It looks like a case statement. This is in your 'main.js' file. Apologies, this is in coffeescript.
 **Angular Vocab**
 Module: a container for the different parts of an app including controllers, services, filters, directives
@@ -57,8 +57,8 @@ Module: a container for the different parts of an app including controllers, ser
     })
 ])
 ```
-
-###Non-Angular Model
+###Models
+####Non-Angular Model
 To display all the posts, we break it up into two Models. We have a collection of posts, and then a post.
 ```js
 function Post(options){
@@ -91,7 +91,7 @@ PostCollection.prototype.fetch = function() {
 };
 ```
 
-###Angular Model
+####Angular Model
 In angular, that AJAX call and the multiple models can all get condensed into one Controller.
 **Angular Vocab**
 Controller: the 'business logic' behind the views
@@ -112,7 +112,8 @@ blogApp.controller('PostIndexCtrl', ['$scope', '$location', '$http', '$routePara
   }
 ])
 ```
-###Non-Angular View
+### Views
+####Non-Angular View
 In your view, you have to render the collection and each post in the collection.
 CollectionView
 ```js
@@ -158,7 +159,7 @@ There are two also templates, one for the collection and one for all the row-vie
     <li id="<%=title%>"><%=title%></li>
 </script>
 ```
-###Angular View
+####Angular View
 In angular, there are awesome `ng` tags that you can use to embed awesome non-static functionality into your HTML. This means looping and all sorts of great stuff (Chris's talk on Angular covered this kind of functionality and it was great. I won't try to repeat it here). You can now simply refer to the posts collection we created earlier in the post controller and loop through it.
 ```html
 <ul ng-repeat="post in posts" class = "no-bullet">
@@ -174,9 +175,9 @@ One thing that always gets me confused with some tutorials and instructions is t
 
 **these instructions are super rough so please use the resource I provided from honeybadger.com for better instructions!**
 
-1. Download Angular! Grab the files called angular.js as well as angular-mocks.js. **where to put it** 'app/assets/javascripts'
-2. **models** You will be making your own angular controllers (this is not actually the controller), so you will want to create a folder for them. Angular controller files are '.js' files. **where to put them** Create a path 'app/assets/javascripts/angular/controllers'
-3. Set up your asset pipeline. Put the following lines of code in 'app/assets/javascripts/application.js':
+1. Download Angular! Grab the files called angular.js as well as angular-mocks.js. **where to put it** `app/assets/javascripts`
+2. **models** You will be making your own angular controllers (this is not actually the controller), so you will want to create a folder for them. Angular controller files are `.js` files. **where to put them** Create a path `app/assets/javascripts/angular/controllers`
+3. Set up your asset pipeline. Put the following lines of code in `app/assets/javascripts/application.js`:
 ```
 //= require jquery
 //= require jquery_ujs
@@ -187,9 +188,9 @@ One thing that always gets me confused with some tutorials and instructions is t
 
 //= require_tree .
 ```
-4. **Views**You will also have your own views in Angular. Views are just plain old 'html' files. **Where to put them** Create a path '/public/templates'. Note that I just put views here because I followed a tutorial that said that's where they go. It might make more sense to put them in 'app/views'
-5. **Controller** create a main.js file. This will contain your frontend Angular controller. **where to put it** 'app/assets/javascripts'
-6. **More Views**You will need to add 'ng-app = appName' in your main html page like so: '<html ng-app = "appName">' appName should match the name you will give the angular module in your main.js file.
+4. **Views** You will also have your own views in Angular. Views are just plain old `html` files. **Where to put them** Create a path `/public/templates`. Note that I just put views here because I followed a tutorial that said that's where they go. It might make more sense to put them in `app/views`
+5. **Controller** create a main.js file. This will contain your frontend Angular controller. **where to put it** `app/assets/javascripts`
+6. **More Views** You will need to add `ng-app = appName` in your main html page like so: `<html ng-app = "appName">` appName should match the name you will give the angular module in your main.js file.
 
 
 ## resources
